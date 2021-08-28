@@ -24,6 +24,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             textViewLoginRegister.setOnClickListener {
                 viewModel.onRegisterTextClicked()
             }
+
+            buttonLoginLogin.setOnClickListener {
+                viewModel.onLoginButtonClicked()
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -31,6 +35,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 when (event) {
                     is LoginViewModel.LoginEvent.GoToRegisterScreen -> {
                         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                        findNavController().navigate(action)
+                    }
+                    is LoginViewModel.LoginEvent.GoToHomeScreen -> {
+                        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(action)
                     }
                 }.exhaustive

@@ -13,6 +13,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     sealed class LoginEvent {
         object GoToRegisterScreen : LoginEvent()
+        object GoToHomeScreen : LoginEvent()
     }
 
     private val loginEventChannel = Channel<LoginEvent>()
@@ -20,5 +21,9 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     fun onRegisterTextClicked() = viewModelScope.launch {
         loginEventChannel.send(LoginEvent.GoToRegisterScreen)
+    }
+
+    fun onLoginButtonClicked() = viewModelScope.launch {
+        loginEventChannel.send(LoginEvent.GoToHomeScreen)
     }
 }
