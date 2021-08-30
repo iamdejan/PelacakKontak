@@ -30,5 +30,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.pelacakkontak.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_vaccineFragment"
+            app:destination="@id/vaccineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vaccineFragment"
+        android:name="com.example.pelacakkontak.ui.vaccine.VaccineFragment"
+        android:label="fragment_vaccine"
+        tools:layout="@layout/fragment_vaccine" />
 </navigation>

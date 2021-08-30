@@ -31,7 +31,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.loginEvent.collect { event ->
+            viewModel.loginEvents.collect { event ->
                 when (event) {
                     is LoginViewModel.LoginEvent.GoToRegisterScreen -> {
                         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()

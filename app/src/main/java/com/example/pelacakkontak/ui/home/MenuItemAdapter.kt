@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pelacakkontak.databinding.CardMenuBinding
 
-class MenuItemAdapter(menuList: List<Menu>) :
+class MenuItemAdapter(menuList: List<Menu>, private val listener: OnItemClickListener) :
     ListAdapter<Menu, MenuItemAdapter.MenuViewHolder>(DiffCallback()) {
 
     init {
@@ -17,11 +17,23 @@ class MenuItemAdapter(menuList: List<Menu>) :
     inner class MenuViewHolder(private val binding: CardMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val menu = getItem(position)
+                        listener.onMenuClicked(menu)
+                    }
+                }
+            }
+        }
+
         fun bind(menu: Menu) {
             binding.apply {
                 root.setCardBackgroundColor(menu.backgroundColor)
-                imageViewCardImage.setImageResource(menu.resourceId)
-                textViewCardMenuTitle.text = menu.title
+                imageViewMenuImage.setImageResource(menu.resourceId)
+                textViewMenuTitle.text = menu.title
             }
         }
 
@@ -36,6 +48,10 @@ class MenuItemAdapter(menuList: List<Menu>) :
             return oldItem == newItem
         }
 
+    }
+
+    interface OnItemClickListener {
+        fun onMenuClicked(menu: Menu)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {

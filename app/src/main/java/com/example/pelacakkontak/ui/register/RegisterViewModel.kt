@@ -16,7 +16,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     }
 
     private val registerEventChannel = Channel<RegisterEvent>()
-    val registerEvent = registerEventChannel.receiveAsFlow()
+    val registerEvents = registerEventChannel.receiveAsFlow()
 
     fun onLoginTextClicked() = viewModelScope.launch {
         registerEventChannel.send(RegisterEvent.GoToLoginScreen)

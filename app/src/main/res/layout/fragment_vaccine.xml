@@ -4,29 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
+    tools:context=".ui.vaccine.VaccineFragment"
     android:background="#0094FF">
 
-
     <TextView
-        android:text="Selamat datang, Kevin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_home_welcome"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp" />
-
-    <TextView
-        android:text="Kamu butuh apa?"
+        android:text="Sertifikat vaksin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_home_title"
+        android:id="@+id/textView_vaccine_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,10 +25,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textView_home_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView_vaccine_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/recyclerView_home_menu" />
+        android:id="@+id/recyclerView_vaccine_certificates" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
