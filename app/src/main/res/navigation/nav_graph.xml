@@ -34,10 +34,18 @@
         <action
             android:id="@+id/action_homeFragment_to_vaccineFragment"
             app:destination="@id/vaccineFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_healthTestFragment"
+            app:destination="@id/healthTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/vaccineFragment"
         android:name="com.example.pelacakkontak.ui.vaccine.VaccineFragment"
         android:label="fragment_vaccine"
         tools:layout="@layout/fragment_vaccine" />
+    <fragment
+        android:id="@+id/healthTestFragment"
+        android:name="com.example.pelacakkontak.ui.healthtest.HealthTestFragment"
+        android:label="fragment_healthtest"
+        tools:layout="@layout/fragment_healthtest" />
 </navigation>

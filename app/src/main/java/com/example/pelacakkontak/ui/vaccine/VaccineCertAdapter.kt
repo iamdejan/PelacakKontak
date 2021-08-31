@@ -6,11 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pelacakkontak.databinding.CardVaccineBinding
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-
-val FORMATTER: DateTimeFormatter =
-    DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.of("Asia/Jakarta"))
+import com.example.pelacakkontak.util.FORMATTER
 
 class VaccineCertAdapter(vaccineCertList: List<VaccineCertificate>) :
     ListAdapter<VaccineCertificate, VaccineCertAdapter.VaccineViewHolder>(DiffCallback()) {

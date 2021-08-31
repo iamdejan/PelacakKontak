@@ -41,6 +41,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), MenuItemAdapter.OnIte
                         findNavController().navigate(action)
                     }
                     is HomeViewModel.HomeEvent.GoToTestFragment -> {
+                        val action = HomeFragmentDirections.actionHomeFragmentToHealthTestFragment()
+                        findNavController().navigate(action)
                     }
                 }.exhaustive
             }

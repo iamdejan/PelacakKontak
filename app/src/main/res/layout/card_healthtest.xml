@@ -15,9 +15,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_vaccine_title"
+            android:id="@+id/textView_healthTest_testType"
             card_view:layout_constraintStart_toStartOf="parent"
-            android:text="Sertifikat #n"
+            android:text="PCR Test"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"
@@ -28,20 +28,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_vaccine_brand"
-            android:text="Sputnik V"
+            android:id="@+id/textView_healthTest_provider"
+            android:text="RS Medistra"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="10dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/textView_vaccine_title" />
+            card_view:layout_constraintTop_toBottomOf="@+id/textView_healthTest_testType" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_vaccine_date"
+            android:id="@+id/textView_healthTest_date"
             android:text="2021-08-12"
             android:textColor="@color/black"
             android:textSize="24sp"
