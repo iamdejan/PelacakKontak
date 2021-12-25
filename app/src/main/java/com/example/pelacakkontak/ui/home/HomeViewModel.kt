@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel @Inject constructor() : ViewModel() {
 
     sealed class HomeEvent {
+        object Loading: HomeEvent()
         object GoToVaccineFragment : HomeEvent()
         object GoToTestFragment : HomeEvent()
     }
@@ -23,6 +24,8 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     val homeEvents = homeEventChannel.receiveAsFlow()
 
     fun onMenuClicked(menu: Menu) = viewModelScope.launch {
+        homeEventChannel.send(HomeEvent.Loading)
+
         when (menu.destScren) {
             VACCINE_CERT_LIST -> {
                 homeEventChannel.send(HomeEvent.GoToVaccineFragment)
