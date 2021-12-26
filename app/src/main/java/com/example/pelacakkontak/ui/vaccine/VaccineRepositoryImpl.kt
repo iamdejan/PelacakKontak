@@ -11,7 +11,7 @@ class VaccineRepositoryImpl @Inject constructor() : VaccineRepository {
 
     override fun list(): Flow<List<VaccineCertificate>> {
         return flow {
-            delay(2000L) // TODO dejan: only for trials
+            delay(2000L) // TODO: remove later, this is only for trials
             emit(
                 listOf(
                     VaccineCertificate(
