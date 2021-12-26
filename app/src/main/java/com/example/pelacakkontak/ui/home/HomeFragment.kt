@@ -36,9 +36,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), MenuItemAdapter.OnIte
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.homeEvents.collect { event ->
                 when (event) {
-                    is HomeViewModel.HomeEvent.Loading -> {
-                        // TODO dejan: how to load a spinner in Android Studio?
-                    }
                     is HomeViewModel.HomeEvent.GoToVaccineFragment -> {
                         val action = HomeFragmentDirections.actionHomeFragmentToVaccineFragment()
                         findNavController().navigate(action)

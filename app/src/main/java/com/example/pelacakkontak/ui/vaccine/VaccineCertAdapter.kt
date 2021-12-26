@@ -8,13 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pelacakkontak.databinding.CardVaccineBinding
 import com.example.pelacakkontak.util.FORMATTER
 
-class VaccineCertAdapter(vaccineCertList: List<VaccineCertificate>) :
+class VaccineCertAdapter :
     ListAdapter<VaccineCertificate, VaccineCertAdapter.VaccineViewHolder>(DiffCallback()) {
-
-    // TODO: this might be deleted in the future
-    init {
-        submitList(vaccineCertList)
-    }
 
     inner class VaccineViewHolder(private val binding: CardVaccineBinding) :
         RecyclerView.ViewHolder(binding.root) {
