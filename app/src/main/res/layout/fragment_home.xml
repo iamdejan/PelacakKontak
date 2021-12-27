@@ -7,7 +7,6 @@
     tools:context=".ui.home.HomeFragment"
     android:background="#0094FF">
 
-
     <TextView
         android:text="Selamat datang, Kevin"
         android:layout_width="wrap_content"
