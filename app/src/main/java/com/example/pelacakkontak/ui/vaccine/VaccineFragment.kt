@@ -33,7 +33,7 @@ class VaccineFragment : BaseFragment(R.layout.fragment_vaccine) {
         viewModel.load()
         viewModel.vaccineCerts.observe(viewLifecycleOwner) {
             vaccineCertAdapter.submitList(it)
-            viewModel.onLoadingFinished()
+            viewModel.endLoad()
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {

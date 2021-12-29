@@ -1,5 +1,7 @@
 package com.example.pelacakkontak.di
 
+import com.example.pelacakkontak.ui.healthtest.HealthTestRepository
+import com.example.pelacakkontak.ui.healthtest.HealthTestRepositoryImpl
 import com.example.pelacakkontak.ui.vaccine.VaccineRepository
 import com.example.pelacakkontak.ui.vaccine.VaccineRepositoryImpl
 import dagger.Binds
@@ -16,5 +18,9 @@ abstract class AppModule {
     @Singleton
     @Binds
     abstract fun provideVaccineRepository(vaccineRepository: VaccineRepositoryImpl): VaccineRepository
+
+    @Singleton
+    @Binds
+    abstract fun provideHealthTestRepository(healthTestRepository: HealthTestRepositoryImpl): HealthTestRepository
 
 }

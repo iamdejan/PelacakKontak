@@ -5,21 +5,20 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class VaccineViewModel @Inject constructor(private val vaccineRepository: VaccineRepository): ViewModel() {
+class VaccineViewModel @Inject constructor(vaccineRepository: VaccineRepository): ViewModel() {
 
     sealed class VaccineEvent {
         object Loading: VaccineEvent()
         object LoadingFinished: VaccineEvent()
     }
 
-    private val vaccineCertsFlow = vaccineRepository.list()
-    val vaccineCerts = vaccineCertsFlow.asLiveData()
+    private val vaccineCertFlow = vaccineRepository.list()
+    val vaccineCerts = vaccineCertFlow.asLiveData()
 
     private val vaccineEventChannel = Channel<VaccineEvent>()
     val vaccineEvents = vaccineEventChannel.receiveAsFlow()
@@ -28,7 +27,7 @@ class VaccineViewModel @Inject constructor(private val vaccineRepository: Vaccin
         vaccineEventChannel.send(VaccineEvent.Loading)
     }
 
-    fun onLoadingFinished() = viewModelScope.launch {
+    fun endLoad() = viewModelScope.launch {
         vaccineEventChannel.send(VaccineEvent.LoadingFinished)
     }
 }

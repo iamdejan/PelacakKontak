@@ -2,21 +2,27 @@ package com.example.pelacakkontak.ui.healthtest
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pelacakkontak.R
 import com.example.pelacakkontak.databinding.FragmentHealthtestBinding
 import com.example.pelacakkontak.ui.BaseFragment
+import com.example.pelacakkontak.util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.Instant
-import java.time.temporal.ChronoUnit
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HealthTestFragment : BaseFragment(R.layout.fragment_healthtest) {
+
+    private val viewModel: HealthTestViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentHealthtestBinding.bind(view)
-        val healthTestAdapter = HealthTestAdapter(loadData())
+        val healthTestAdapter = HealthTestAdapter()
         binding.apply {
             recyclerViewHtResults.apply {
                 adapter = healthTestAdapter
@@ -24,23 +30,30 @@ class HealthTestFragment : BaseFragment(R.layout.fragment_healthtest) {
                 setHasFixedSize(true)
             }
         }
-    }
 
-    private fun loadData(): List<HealthTestResult> {
-        // TODO: load from API in the future
-        return listOf(
-            HealthTestResult(
-                "https://images.bisnis-cdn.com/posts/2021/08/10/1428103/serifikat-vaksinasi.jpg",
-                "Swab PCR",
-                "RS Medistra",
-                Instant.now()
-            ),
-            HealthTestResult(
-                "https://images.bisnis-cdn.com/posts/2021/08/10/1428103/serifikat-vaksinasi.jpg",
-                "Swab PCR",
-                "GSI Lab Bintaro",
-                Instant.now().plus(3 * 30, ChronoUnit.DAYS)
-            )
-        )
+        viewModel.load()
+        viewModel.healthTests.observe(viewLifecycleOwner) {
+            healthTestAdapter.submitList(it)
+            viewModel.endLoad()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.healthEvents.collect { event ->
+                when (event) {
+                    is HealthTestViewModel.HealthTestEvent.Loading -> {
+                        binding.recyclerViewHtResults.isVisible = false
+                        binding.textViewHtTitle.isVisible = false
+
+                        binding.progressBarHtLoader.isVisible = true
+                    }
+                    is HealthTestViewModel.HealthTestEvent.LoadingFinished -> {
+                        binding.recyclerViewHtResults.isVisible = true
+                        binding.textViewHtTitle.isVisible = true
+
+                        binding.progressBarHtLoader.isVisible = false
+                    }
+                }.exhaustive
+            }
+        }
     }
 }
