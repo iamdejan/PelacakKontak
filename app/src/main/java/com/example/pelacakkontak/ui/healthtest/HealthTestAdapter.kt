@@ -8,13 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pelacakkontak.databinding.CardHealthtestBinding
 import com.example.pelacakkontak.util.FORMATTER
 
-class HealthTestAdapter(testResults: List<HealthTestResult>) :
+class HealthTestAdapter :
     ListAdapter<HealthTestResult, HealthTestAdapter.HealthTestViewHolder>(DiffCallback()) {
-
-    // TODO: remove this in future
-    init {
-        submitList(testResults)
-    }
 
     inner class HealthTestViewHolder(private val binding: CardHealthtestBinding) :
         RecyclerView.ViewHolder(binding.root) {
