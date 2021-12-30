@@ -26,7 +26,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
 
             buttonLoginLogin.setOnClickListener {
-                viewModel.onLoginButtonClicked()
+                viewModel.onLoginButtonClicked(editTextLoginEmail.text.toString(), editTextLoginPassword.text.toString())
             }
         }
 
@@ -37,9 +37,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                         findNavController().navigate(action)
                     }
-                    is LoginViewModel.LoginEvent.GoToHomeScreen -> {
+                    is LoginViewModel.LoginEvent.LoginSuccess -> {
                         val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(action)
+                    }
+                    is LoginViewModel.LoginEvent.LoginFailed -> {
+                        // TODO dejan: handle this (make Snackbar?)
                     }
                 }.exhaustive
             }
