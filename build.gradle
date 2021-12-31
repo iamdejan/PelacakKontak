@@ -6,7 +6,10 @@ buildscript {
         appCompatVersion = "1.3.0"
         constraintLayoutVersion = "2.1.2"
         coroutinesVersion = "1.3.9"
-        dataStoreVersion = "1.0.0"
+
+        // from https://www.section.io/engineering-education/getting-started-with-datastore-in-kotlin/
+        dataStoreVersion = "1.0.0-beta01"
+
         espressoVersion = "3.4.0"
         fragmentVersion = "1.4.0"
         gradleVersion = "4.1.0"

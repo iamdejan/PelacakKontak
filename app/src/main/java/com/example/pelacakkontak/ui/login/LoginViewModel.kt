@@ -2,6 +2,7 @@ package com.example.pelacakkontak.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pelacakkontak.datastore.TokenDataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository, private val tokenDataStoreRepository: TokenDataStoreRepository) : ViewModel() {
 
     sealed class LoginEvent {
         object GoToRegisterScreen : LoginEvent()
@@ -38,7 +39,7 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
                     loginEventChannel.send(LoginEvent.LoginFailed("Token is null in response body"))
                     return@launch
                 }
-                // TODO dejan: save token in local storage
+                tokenDataStoreRepository.setBearerToken(token)
                 loginEventChannel.send(LoginEvent.LoginSuccess)
             }
             401 -> loginEventChannel.send(LoginEvent.LoginFailed("Unauthorized"))

@@ -1,6 +1,8 @@
 package com.example.pelacakkontak.di
 
 import com.example.pelacakkontak.api.AuthApi
+import com.example.pelacakkontak.datastore.TokenDataStoreRepository
+import com.example.pelacakkontak.datastore.TokenDataStoreRepositoryImpl
 import com.example.pelacakkontak.ui.healthtest.HealthTestRepository
 import com.example.pelacakkontak.ui.healthtest.HealthTestRepositoryImpl
 import com.example.pelacakkontak.ui.login.LoginRepository
@@ -48,4 +50,8 @@ abstract class AppModuleBinds {
     @Binds
     @Singleton
     abstract fun provideLoginRepository(loginRepository: LoginRepositoryImpl): LoginRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideTokenDataStoreRepository(tokenDataStoreRepository: TokenDataStoreRepositoryImpl): TokenDataStoreRepository
 }
