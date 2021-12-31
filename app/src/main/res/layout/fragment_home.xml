@@ -8,7 +8,7 @@
     android:background="#0094FF">
 
     <TextView
-        android:text="Selamat datang, Kevin"
+        android:text="Selamat datang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView_home_welcome"

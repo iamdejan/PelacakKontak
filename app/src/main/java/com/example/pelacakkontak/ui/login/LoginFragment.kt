@@ -9,6 +9,7 @@ import com.example.pelacakkontak.R
 import com.example.pelacakkontak.databinding.FragmentLoginBinding
 import com.example.pelacakkontak.ui.BaseFragment
 import com.example.pelacakkontak.util.exhaustive
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -26,7 +27,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
 
             buttonLoginLogin.setOnClickListener {
-                viewModel.onLoginButtonClicked()
+                viewModel.onLoginButtonClicked(editTextLoginEmail.text.toString(), editTextLoginPassword.text.toString())
             }
         }
 
@@ -37,9 +38,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
                         findNavController().navigate(action)
                     }
-                    is LoginViewModel.LoginEvent.GoToHomeScreen -> {
+                    is LoginViewModel.LoginEvent.LoginSuccess -> {
                         val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(action)
+                    }
+                    is LoginViewModel.LoginEvent.LoginFailed -> {
+                        Snackbar.make(requireView(), event.message, Snackbar.LENGTH_LONG).show()
                     }
                 }.exhaustive
             }

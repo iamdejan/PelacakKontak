@@ -1,26 +1,27 @@
 package com.example.pelacakkontak.di
 
-import com.example.pelacakkontak.ui.healthtest.HealthTestRepository
-import com.example.pelacakkontak.ui.healthtest.HealthTestRepositoryImpl
-import com.example.pelacakkontak.ui.vaccine.VaccineRepository
-import com.example.pelacakkontak.ui.vaccine.VaccineRepositoryImpl
-import dagger.Binds
+import com.example.pelacakkontak.api.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AppModule {
+object AppModule {
 
+    @Provides
     @Singleton
-    @Binds
-    abstract fun provideVaccineRepository(vaccineRepository: VaccineRepositoryImpl): VaccineRepository
+    fun provideRetrofit(): Retrofit = Retrofit.Builder()
+        .baseUrl(AuthApi.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
+    @Provides
     @Singleton
-    @Binds
-    abstract fun provideHealthTestRepository(healthTestRepository: HealthTestRepositoryImpl): HealthTestRepository
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
 }
