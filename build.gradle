@@ -6,7 +6,7 @@ buildscript {
         appCompatVersion = "1.4.0"
         constraintLayoutVersion = "2.1.2"
         coroutinesVersion = "1.6.0"
-        dataStoreVersion = "1.0.0-beta01"
+        dataStoreVersion = "1.0.0"
         espressoVersion = "3.4.0"
         fragmentVersion = "1.4.0"
         gradleVersion = "4.1.0"
