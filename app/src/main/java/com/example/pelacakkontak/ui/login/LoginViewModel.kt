@@ -26,25 +26,27 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     }
 
     fun onLoginButtonClicked(email: String, password: String) = viewModelScope.launch {
-        val response = loginRepository.login(email, password)
-        if (!response.isSuccessful) {
-            loginEventChannel.send(LoginEvent.LoginFailed("Something is wrong with login request"))
+        if(email.isBlank()) {
+            loginEventChannel.send(LoginEvent.LoginFailed("Mohon masukkan email"))
             return@launch
         }
-
+        if(password.isBlank()) {
+            loginEventChannel.send(LoginEvent.LoginFailed("Mohon masukkan password"))
+            return@launch
+        }
+        val response = loginRepository.login(email, password)
         when (response.code()) {
             200 -> {
                 val token = response.body()?.jwtToken?.token
                 if(token == null) {
-                    loginEventChannel.send(LoginEvent.LoginFailed("Token is null in response body"))
+                    loginEventChannel.send(LoginEvent.LoginFailed("Token null di response"))
                     return@launch
                 }
                 tokenDataStoreRepository.setBearerToken(token)
                 loginEventChannel.send(LoginEvent.LoginSuccess)
             }
-            401 -> loginEventChannel.send(LoginEvent.LoginFailed("Unauthorized"))
-            500 -> loginEventChannel.send(LoginEvent.LoginFailed("Internal server error"))
+            401 -> loginEventChannel.send(LoginEvent.LoginFailed("Email dan/atau password salah"))
+            in 500..599 -> loginEventChannel.send(LoginEvent.LoginFailed("Error pada server kami"))
         }
-
     }
 }
