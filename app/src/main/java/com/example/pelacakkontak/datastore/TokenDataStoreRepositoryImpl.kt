@@ -6,8 +6,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -16,11 +17,11 @@ class TokenDataStoreRepositoryImpl @Inject constructor(@ApplicationContext priva
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth_token")
 
-    private val preferenceFlow: Flow<String> = context.dataStore.data.map { preferences ->
+    private val preferenceFlow: LiveData<String> = context.dataStore.data.map { preferences ->
         preferences[PreferenceKeys.BEARER_TOKEN].toString()
-    }
+    }.asLiveData()
 
-    override fun getBearerToken(): Flow<String> = preferenceFlow
+    override fun getBearerToken(): LiveData<String> = preferenceFlow
 
     override suspend fun setBearerToken(value: String) {
         context.dataStore.edit { settings ->
