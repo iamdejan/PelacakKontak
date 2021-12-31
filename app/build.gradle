@@ -27,6 +27,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // waiting to upgrade to Java 11
+    // blocker: https://stackoverflow.com/questions/68586270/viewbinding-with-java11-androidstudio-always-shows-error-but-runs-without-any
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

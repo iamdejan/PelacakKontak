@@ -1,10 +1,10 @@
 package com.example.pelacakkontak.datastore
 
-import kotlinx.coroutines.flow.Flow
+import androidx.lifecycle.LiveData
 
 interface TokenDataStoreRepository {
 
-    fun getBearerToken(): Flow<String>
+    fun getBearerToken(): LiveData<String>
 
     suspend fun setBearerToken(value: String)
 
