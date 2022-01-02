@@ -15,8 +15,8 @@ class LoginRepositoryImpl @Inject constructor(private val authApi: AuthApi) : Lo
         return try {
             authApi.login(LoginRequest(email, password))
         } catch (e: SocketTimeoutException) {
-            val gson = Gson();
-            val failResponse = LoginResponse(null, false);
+            val gson = Gson()
+            val failResponse = LoginResponse(null, false)
             Response.error(404, ResponseBody.create(null, gson.toJson(failResponse)))
         }
     }
