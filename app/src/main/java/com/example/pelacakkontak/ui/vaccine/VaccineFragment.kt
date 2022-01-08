@@ -11,7 +11,6 @@ import com.example.pelacakkontak.databinding.FragmentVaccineBinding
 import com.example.pelacakkontak.ui.BaseFragment
 import com.example.pelacakkontak.util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class VaccineFragment : BaseFragment(R.layout.fragment_vaccine) {
@@ -38,7 +37,7 @@ class VaccineFragment : BaseFragment(R.layout.fragment_vaccine) {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.vaccineEvents.collect { event ->
-                when(event) {
+                when (event) {
                     is VaccineViewModel.VaccineEvent.Loading -> {
                         binding.progressBarVaccineLoader.isVisible = true
 
